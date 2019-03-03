@@ -1,27 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.XR.iOS;
 public class RoomDetector : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private UnityARAnchorManager unityARAnchorManager;
+
     void Start()
     {
-//        planeAnchorMap = new LinkedListDictionary<string,ARPlaneAnchorGameObject> ();
+        unityARAnchorManager = new UnityARAnchorManager();
+        UnityARUtility.InitializePlanePrefab (new GameObject());
         UnityARSessionNativeInterface.ARAnchorAddedEvent += AddAnchor;
-//        UnityARSessionNativeInterface.ARAnchorUpdatedEvent += UpdateAnchor;
-//        UnityARSessionNativeInterface.ARAnchorRemovedEvent += RemoveAnchor;       
+    }
+
+    void OnDestroy()
+    {
+        unityARAnchorManager.Destroy ();
     }
 
     void AddAnchor(ARPlaneAnchor arPlaneAnchor)
     {
-        Debug.Log("anchor added");
-    }
+        Debug.Log(arPlaneAnchor.center);
+        Debug.Log(arPlaneAnchor.transform);
+        IEnumerable<ARPlaneAnchorGameObject> arpags = unityARAnchorManager.GetCurrentPlaneAnchors();
+        
+        var planeCount = arpags.Count();
+        
+        Debug.Log(planeCount);
 
-    // Update is called once per frame
-    void Update()
-    {
-    
+        if (planeCount > 3)
+        {
+            Debug.Log("Enough Plane Detected.");
+        }
     }
 }
 
