@@ -8,6 +8,7 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="RoomDetector.cs" t="Include" />
         <e p="UnityARKitPlugin" t="Include">
           <e p="ARKitRemote" t="Include">
             <e p="ARKitFaceTrackingRemoteConnection.cs" t="Include" />
