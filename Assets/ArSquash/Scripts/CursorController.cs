@@ -33,12 +33,15 @@ public class CursorController : MonoBehaviour {
 //        //and the rotation from the transform of the plane collider
 //        m_HitTransform.rotation = hit.transform.rotation;
 //#else
-        if (Input.touchCount <= 0 || m_HitTransform == null) {
+        if (!m_HitTransform) {
+            return;
+        }
+
+        if (Input.touchCount > 0) {
             var touch = Input.GetTouch(0);
             if (touch.phase != TouchPhase.Began && touch.phase != TouchPhase.Moved) {
                 var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
                 Debug.Log($"SCREEN x:{screenPosition.x}, y: {screenPosition.y}");
-                return;
             }
         }
 
