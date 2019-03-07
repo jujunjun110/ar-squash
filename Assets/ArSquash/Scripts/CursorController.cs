@@ -37,20 +37,10 @@ public class CursorController : MonoBehaviour {
             return;
         }
 
-        if (Input.touchCount > 0) {
-            var touch = Input.GetTouch(0);
-            if (touch.phase != TouchPhase.Began && touch.phase != TouchPhase.Moved) {
-                var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
-                Debug.Log($"SCREEN x:{screenPosition.x}, y: {screenPosition.y}");
-            }
-        }
 
+        var hitResults = UnityARSessionNativeInterface.GetARSessionNativeInterface()
+            .HitTest(new ARPoint {x = 0.5, y = 0.5}, ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent);
 
-        Debug.Log($"CENTER x:{Screen.width / 2}, y: {Screen.height / 2}");
-
-        var point = new ARPoint {x = 0.5, y = 0.5};
-
-        var hitResults = UnityARSessionNativeInterface.GetARSessionNativeInterface().HitTest(point, resultTypes);
         if (hitResults.Count <= 0) {
             return;
         }
@@ -59,5 +49,14 @@ public class CursorController : MonoBehaviour {
 
         m_HitTransform.position = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
         m_HitTransform.rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
+
+        if (Input.touchCount <= 0) {
+            return;
+        }
+
+        var touch = Input.GetTouch(0);
+        if (touch.phase != TouchPhase.Began && touch.phase != TouchPhase.Moved) {
+            Debug.Log($"Touched.");
+        }
     }
 }
