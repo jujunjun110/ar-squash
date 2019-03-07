@@ -7,7 +7,7 @@ using UnityEngine.XR.iOS;
 public class CursorController : MonoBehaviour {
     [SerializeField] private Transform m_HitTransform;
 
-    [SerializeField] private GameObject FloorPrefab;
+    [SerializeField] private GameObject PolePrefab;
 //    public float maxRayDistance = 30.0f;
 //    public LayerMask collisionLayer = 1 << 10; //ARKitPlane layer
 
@@ -56,9 +56,9 @@ public class CursorController : MonoBehaviour {
         var touch = Input.GetTouch(0);
         if (touch.phase != TouchPhase.Began && touch.phase != TouchPhase.Moved) {
             Debug.Log($"Touched.");
-            var floor = Instantiate(FloorPrefab);
-            floor.transform.position = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
-            floor.transform.rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
+            var pole = Instantiate(PolePrefab);
+            pole.transform.position = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
+            pole.transform.rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
         }
     }
 }

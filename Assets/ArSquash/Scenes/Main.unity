@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_HitTransform: {fileID: 813315322}
-  FloorPrefab: {fileID: 6943531763454315523, guid: e93f6f35e5bdd4dc485da15cfa723749,
+  PolePrefab: {fileID: 2227679839498844888, guid: d1c33913161fa41bfbb919a50ac191dc,
     type: 3}
 --- !u!136 &813315324
 CapsuleCollider:
