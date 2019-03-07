@@ -10,7 +10,6 @@ public class FloorController : MonoBehaviour {
         scale = 1;
     }
 
-    // Update is called once per frame
     void Update() {
         if (scale > max_scale) {
             return;
