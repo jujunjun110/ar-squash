@@ -33,15 +33,12 @@ public class CursorController : MonoBehaviour {
 //        //and the rotation from the transform of the plane collider
 //        m_HitTransform.rotation = hit.transform.rotation;
 //#else
-        if (!m_HitTransform) {
-            return;
-        }
 
 
         var hitResults = UnityARSessionNativeInterface.GetARSessionNativeInterface()
             .HitTest(new ARPoint {x = 0.5, y = 0.5}, ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent);
 
-        if (hitResults.Count <= 0) {
+        if (!m_HitTransform || hitResults.Count <= 0) {
             return;
         }
 
