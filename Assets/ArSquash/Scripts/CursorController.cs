@@ -57,7 +57,9 @@ public class CursorController : MonoBehaviour {
         if (touch.phase != TouchPhase.Began && touch.phase != TouchPhase.Moved) {
             Debug.Log($"Touched.");
             var pole = Instantiate(PolePrefab);
-            pole.transform.position = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
+            var poleHeight = PolePrefab.transform.localScale.y;
+            var _pos = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
+            pole.transform.position = new Vector3(_pos.x, _pos.y + poleHeight, _pos.z);
             pole.transform.rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
         }
     }

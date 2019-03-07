@@ -299,7 +299,6 @@ GameObject:
   - component: {fileID: 813315325}
   - component: {fileID: 813315324}
   - component: {fileID: 813315323}
-  - component: {fileID: 813315327}
   m_Layer: 0
   m_Name: Cursor
   m_TagString: Untagged
@@ -395,21 +394,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 813315321}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &813315327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 813315321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6eb741702baed4a6f8f71282a78682c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doBlink: 1
-  max_opacity: 0.8
-  min_opacity: 0.4
 --- !u!1 &1015074371
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,7 +410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1015074372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,7 +462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1169278866
 Transform:
   m_ObjectHideFlags: 0
@@ -511,7 +495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1351968960
 AudioListener:
   m_ObjectHideFlags: 0
