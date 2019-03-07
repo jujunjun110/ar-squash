@@ -50,23 +50,14 @@ public class CursorController : MonoBehaviour {
 
         var point = new ARPoint {x = 0.5, y = 0.5};
 
-        HitTestWithResultType(point, ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent);
-    }
-
-    bool HitTestWithResultType(ARPoint point, ARHitTestResultType resultTypes) {
         var hitResults = UnityARSessionNativeInterface.GetARSessionNativeInterface().HitTest(point, resultTypes);
         if (hitResults.Count <= 0) {
-            return false;
+            return;
         }
 
         var hitResult = hitResults.First();
 
-        Debug.Log("Got hit!");
         m_HitTransform.position = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
         m_HitTransform.rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
-        Debug.Log(
-            $"x:{m_HitTransform.position.x:0.######} y:{m_HitTransform.position.y:0.######} z:{m_HitTransform.position.z:0.######}");
-
-        return true;
     }
 }
