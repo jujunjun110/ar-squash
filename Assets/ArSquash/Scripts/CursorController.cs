@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.XR.iOS;
 
@@ -33,36 +34,20 @@ public class CursorController : MonoBehaviour {
 //        m_HitTransform.rotation = hit.transform.rotation;
 //#else
         if (Input.touchCount <= 0 || m_HitTransform == null) {
-            return;
+            var touch = Input.GetTouch(0);
+            if (touch.phase != TouchPhase.Began && touch.phase != TouchPhase.Moved) {
+                var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
+                Debug.Log($"SCREEN x:{screenPosition.x}, y: {screenPosition.y}");
+                return;
+            }
         }
 
-        var touch = Input.GetTouch(0);
-        if (touch.phase != TouchPhase.Began && touch.phase != TouchPhase.Moved) {
-            return;
-        }
 
-        var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
-        var point = new ARPoint {
-            x = screenPosition.x,
-            y = screenPosition.y
-        };
+        Debug.Log($"CENTER x:{Screen.width / 2}, y: {Screen.height / 2}");
+
+        var point = new ARPoint {x = 0.5, y = 0.5};
 
         HitTestWithResultType(point, ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent);
-//        ARHitTestResultType[] resultTypes = {
-//            //ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingGeometry,
-//            ARHitTestResultType.ARHitTestResultTypeExistingPlaneUsingExtent,
-//            // if you want to use infinite planes use this:
-//            //ARHitTestResultType.ARHitTestResultTypeExistingPlane,
-//            //ARHitTestResultType.ARHitTestResultTypeEstimatedHorizontalPlane, 
-//            //ARHitTestResultType.ARHitTestResultTypeEstimatedVerticalPlane, 
-//            //ARHitTestResultType.ARHitTestResultTypeFeaturePoint
-//        };
-//
-//        foreach (ARHitTestResultType resultType in resultTypes) {
-//            if (HitTestWithResultType(point, resultType)) {
-//                return;
-//            }
-//        }
     }
 
     bool HitTestWithResultType(ARPoint point, ARHitTestResultType resultTypes) {
@@ -71,15 +56,14 @@ public class CursorController : MonoBehaviour {
             return false;
         }
 
-        foreach (var hitResult in hitResults) {
-            Debug.Log("Got hit!");
-            m_HitTransform.position = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
-            m_HitTransform.rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
-            Debug.Log(string.Format("x:{0:0.######} y:{1:0.######} z:{2:0.######}", m_HitTransform.position.x,
-                m_HitTransform.position.y, m_HitTransform.position.z));
-            return true;
-        }
+        var hitResult = hitResults.First();
 
-        return false;
+        Debug.Log("Got hit!");
+        m_HitTransform.position = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
+        m_HitTransform.rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
+        Debug.Log(
+            $"x:{m_HitTransform.position.x:0.######} y:{m_HitTransform.position.y:0.######} z:{m_HitTransform.position.z:0.######}");
+
+        return true;
     }
 }
