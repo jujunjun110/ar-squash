@@ -414,6 +414,7 @@ GameObject:
   - component: {fileID: 1831258156}
   - component: {fileID: 1831258155}
   - component: {fileID: 1831258154}
+  - component: {fileID: 1831258158}
   m_Layer: 0
   m_Name: HitCube
   m_TagString: Untagged
@@ -447,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74a58fbf8787f435c836c1e024fcc5dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HitTransform: {fileID: 0}
+  m_HitTransform: {fileID: 1831258153}
   maxRayDistance: 30
   collisionLayer:
     serializedVersion: 2
@@ -510,6 +511,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1831258152}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1831258158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831258152}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6941ec02ead994c9b848d640887441f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HitTransform: {fileID: 0}
+  maxRayDistance: 30
+  collisionLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &2052691304
 GameObject:
   m_ObjectHideFlags: 0
