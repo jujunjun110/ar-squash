@@ -9,9 +9,9 @@ public class DebugCameraController : MonoBehaviour {
 
 
     void Update() {
-        if (Input.GetAxis("Mouse X") == 0) {
-            return;
-        }
+//        if (Input.GetAxis("Mouse X") == 0) {
+//            return;
+//        }
 
         if (Input.anyKey) {
             // Move
