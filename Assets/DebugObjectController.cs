@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class DebugObjectController : MonoBehaviour {
     [SerializeField] private GameObject arCamera;
-//    [SerializeField] private GameObject debugFloor;
 
     void Start() {
         if (Application.isEditor) {
-            arCamera.SetActive(false);
-//            debugFloor.SetActive(true);
-            foreach (Transform child in transform) {
-                child.gameObject.SetActive(true);
-            }
+            ActivateDebugObjects();
+        } else {
+            InActivateDebugObjects();
         }
     }
 
-    // Update is called once per frame
-    void Update() {
+    private void ActivateDebugObjects() {
+        arCamera.SetActive(false);
+        foreach (Transform child in transform) {
+            child.gameObject.SetActive(true);
+        }
+    }
+
+    private void InActivateDebugObjects() {
+        arCamera.SetActive(true);
+        foreach (Transform child in transform) {
+            child.gameObject.SetActive(false);
+        }
     }
 }
