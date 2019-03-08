@@ -13,15 +13,15 @@ public class DebugCameraController : MonoBehaviour {
             return;
         }
 
-        if (Input.GetMouseButtonDown(0)) {
-            Debug.Log("MouseDown");
+        if (Input.anyKey) {
+            // Move
             transform.position += new Vector3(
                 Input.GetAxisRaw("Mouse X") * Time.deltaTime * speed,
                 0.0f,
                 Input.GetAxisRaw("Mouse Y") * Time.deltaTime * speed
             );
         } else {
-            Debug.Log("MouseUp");
+            // Rotate
             transform.Rotate(
                 verticalSpeed * Input.GetAxis("Mouse Y"),
                 horizontalSpeed * Input.GetAxis("Mouse X"),
