@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Experimental.UIElements.StyleEnums;
 using UnityEngine.XR.iOS;
 
 public class CursorController : MonoBehaviour {
@@ -46,9 +47,15 @@ public class CursorController : MonoBehaviour {
 
         var hitResult = hitResults.First();
 
-        m_HitTransform.position = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
-        m_HitTransform.rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
+        UpdateTransform(
+            UnityARMatrixOps.GetPosition(hitResult.worldTransform),
+            UnityARMatrixOps.GetRotation(hitResult.worldTransform)
+        );
+    }
 
+    void UpdateTransform(Vector3 pos, Quaternion rot) {
+        m_HitTransform.position = pos;
+        m_HitTransform.rotation = rot;
         if (Input.touchCount <= 0) {
             return;
         }
@@ -58,9 +65,8 @@ public class CursorController : MonoBehaviour {
             Debug.Log($"Touched.");
             var pole = Instantiate(PolePrefab);
             var poleHeight = PolePrefab.transform.localScale.y;
-            var _pos = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
-            pole.transform.position = new Vector3(_pos.x, _pos.y + poleHeight, _pos.z);
-            pole.transform.rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
+            pole.transform.position = new Vector3(pos.x, pos.y + poleHeight, pos.z);
+            pole.transform.rotation = rot;
         }
     }
 }
