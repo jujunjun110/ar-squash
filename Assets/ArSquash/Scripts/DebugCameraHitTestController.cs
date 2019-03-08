@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DebugCameraHitTestController : MonoBehaviour {
-    [SerializeField] private float maxRayDistance = 30.0f;
+    [SerializeField] private float maxRayDistance = 3000.0f;
     [SerializeField] private LayerMask collisionLayer = 1 << 10; //ARKitPlane layer
     [SerializeField] private GameObject cursorObject;
 
     void Update() {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
+        var layerMask = ~collisionLayer;
 
-        if (!Physics.Raycast(ray, out hit, maxRayDistance, collisionLayer)) {
+        RaycastHit hit;
+        var fwd = transform.TransformDirection(Vector3.forward);
+        if (!Physics.Raycast(transform.position, fwd, out hit, maxRayDistance, layerMask)) {
             return;
         }
 
