@@ -11,11 +11,12 @@ public class RoomGenerator : MonoBehaviour {
             return;
         }
 
-        Instantiate(polePrefab);
+        var pole = Instantiate(polePrefab);
         var poleHeight = polePrefab.transform.localScale.y;
         var pos = cursorObject.transform.position;
-        polePrefab.transform.position = new Vector3(pos.x, pos.y + poleHeight, pos.z);
-        polePrefab.transform.rotation = cursorObject.transform.rotation;
+        Debug.Log(pos);
+        pole.transform.position = new Vector3(pos.x, pos.y + poleHeight, pos.z);
+        pole.transform.rotation = cursorObject.transform.rotation;
     }
 
     bool Touched() {
