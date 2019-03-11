@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Linq;
 using UnityEngine;
 using UnityEngine.XR.iOS;
-using System.Linq;
 
 public class ARCameraHitTestController : MonoBehaviour {
     [SerializeField] private GameObject cursorObject;

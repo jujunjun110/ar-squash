@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DebugCameraHitTestController : MonoBehaviour {
     [SerializeField] private float maxRayDistance = 3000.0f;

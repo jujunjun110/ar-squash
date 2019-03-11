@@ -1,17 +1,16 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Blinker : MonoBehaviour {
-    private int count;
+    private static int count;
     public bool doBlink = true;
     public double max_opacity = 0.8;
     public double min_opacity = 0.4;
 
-    void Start() {
-        count = 0;
-    }
+//    Intのデフォルト値は0だから初期化する必要はない？    
+//    void Start() {
+//        count = 0;
+//    }
 
     void Update() {
         if (!doBlink) {

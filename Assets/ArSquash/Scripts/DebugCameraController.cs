@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DebugCameraController : MonoBehaviour {
     [SerializeField] private float speed = 10.0f;
