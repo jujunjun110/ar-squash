@@ -7,11 +7,6 @@ public class Blinker : MonoBehaviour {
     public double max_opacity = 0.8;
     public double min_opacity = 0.4;
 
-//    Intのデフォルト値は0だから初期化する必要はない？    
-//    void Start() {
-//        count = 0;
-//    }
-
     void Update() {
         if (!doBlink) {
             return;

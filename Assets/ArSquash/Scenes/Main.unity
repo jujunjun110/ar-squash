@@ -205,6 +205,7 @@ MonoBehaviour:
   cursorObject: {fileID: 813315321}
   polePrefab: {fileID: 2227679839498844888, guid: d1c33913161fa41bfbb919a50ac191dc,
     type: 3}
+  room: {fileID: 265548085}
 --- !u!1 &305337874
 GameObject:
   m_ObjectHideFlags: 0
