@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Vuforia;
 
 public class RoomGenerator : MonoBehaviour {
     [SerializeField] private GameObject cursorObject;
@@ -10,15 +11,12 @@ public class RoomGenerator : MonoBehaviour {
     private List<Transform> tappedPoints = new List<Transform>();
 
 
-    void Start() {
-//        tappedPoints = new List<Transform>();
-    }
-
-
     void Update() {
         if (!AppUtil.Touched()) {
             return;
         }
+
+        Debug.Log("TOUCHED");
 
         GeneratePole();
     }
@@ -33,25 +31,38 @@ public class RoomGenerator : MonoBehaviour {
             room.transform
         );
 
-        tappedPoints.Add(cursorObject.transform);
+        var copied = new GameObject().transform;
+        copied.position = cursorObject.transform.position;
+        copied.rotation = cursorObject.transform.rotation;
+
+        tappedPoints.Add(copied);
         Debug.Log(tappedPoints.Count);
-        if (tappedPoints.Count >= 2) {
-            var point1 = tappedPoints[0].position;
-            var point2 = tappedPoints[1].position;
-            var point3 = new Vector3(point1.x, point1.y + 100, point1.z);
+        var pointNum = tappedPoints.Count;
+        if (pointNum >= 2) {
+            foreach (var p in tappedPoints) {
+                Debug.Log(p.position);
+            }
+
+            var point1 = tappedPoints[pointNum - 2].position;
+            var point2 = tappedPoints[pointNum - 1].position;
+            var point3 = new Vector3(point1.x, point1.y + 2, point1.z);
             GenerateMesh(point1, point2, point3);
         }
     }
 
     void GenerateMesh(Vector3 p1, Vector3 p2, Vector3 p3) {
+        foreach (var pos in new[] {p1, p2, p3}) {
+            Debug.Log(pos);
+            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            cube.transform.position = pos;
+        }
+
+
         var mesh = new Mesh {
             vertices = new Vector3[] {
                 p1,
                 p2,
-//                    p3,
-//                    new Vector3(0, 100f),
-//                    new Vector3(100f, -100f),
-                new Vector3(0, 100f, 0),
+                p3,
             },
             triangles = new int[] {0, 1, 2}
         };
