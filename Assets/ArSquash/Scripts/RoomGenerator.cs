@@ -7,7 +7,7 @@ public class RoomGenerator : MonoBehaviour {
     [SerializeField] private GameObject cursorObject;
     [SerializeField] private GameObject polePrefab;
     [SerializeField] private GameObject room;
-    [SerializeField] private Material wallMaterial;
+    [SerializeField] private GameObject wallPrefab;
 
     private List<Transform> tappedPoints = new List<Transform>();
 
@@ -44,25 +44,15 @@ public class RoomGenerator : MonoBehaviour {
     }
 
     void GenerateMesh(Vector3 p1, Vector3 p2) {
-        var p3 = p1 + Vector3.up * 2;
-        var p4 = p1 + Vector3.up * 2;
-
-        foreach (var pos in new[] {p1, p2, p3, p4}) {
-            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            cube.transform.position = pos;
-        }
+        var mid = (p1 + p2) / 2;
+        var tan = (p1.z - p2.z) / (p1.x - p2.x);
+        var horizontal_rot = Mathf.Atan(tan);
+        var distance = Vector3.Distance(p1, p2);
 
 
-        var mesh = new Mesh {
-            vertices = new[] {p1, p2, p3},
-            triangles = new[] {0, 1, 2}
-        };
-
-        mesh.RecalculateNormals();
-        var filter = GetComponent<MeshFilter>();
-        filter.sharedMesh = mesh;
-
-        var renderer = GetComponent<MeshRenderer>();
-        renderer.material = wallMaterial;
+        var wall = Instantiate(wallPrefab);
+        wall.transform.position = new Vector3(mid.x, mid.y + wallPrefab.transform.localScale.y / 2, mid.z);
+        wall.transform.localScale += Vector3.right * (distance - 1);
+        wall.transform.rotation = Quaternion.Euler(0, -horizontal_rot * 180 / Mathf.PI, 0);
     }
 }
