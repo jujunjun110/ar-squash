@@ -39,23 +39,25 @@ public class RoomGenerator : MonoBehaviour {
             var point1 = tappedPoints[0].position;
             var point2 = tappedPoints[1].position;
             var point3 = new Vector3(point1.x, point1.y + 100, point1.z);
-
-            Debug.Log(point1);
-            Debug.Log(point2);
-            Debug.Log(point3);
-
-            var mesh = new Mesh {
-                vertices = new Vector3[] {
-                    point1,
-                    point2,
-                    point3
-                },
-                triangles = new int[] {0, 1, 2}
-            };
-
-            mesh.RecalculateNormals();
-            var filter = GetComponent<MeshFilter>();
-            filter.sharedMesh = mesh;
+            GenerateMesh(point1, point2, point3);
         }
+    }
+
+    void GenerateMesh(Vector3 p1, Vector3 p2, Vector3 p3) {
+        var mesh = new Mesh {
+            vertices = new Vector3[] {
+                p1,
+                p2,
+//                    p3,
+//                    new Vector3(0, 100f),
+//                    new Vector3(100f, -100f),
+                new Vector3(0, 100f, 0),
+            },
+            triangles = new int[] {0, 1, 2}
+        };
+
+        mesh.RecalculateNormals();
+        var filter = GetComponent<MeshFilter>();
+        filter.sharedMesh = mesh;
     }
 }
