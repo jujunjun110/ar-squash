@@ -11,10 +11,12 @@ public class RoomGenerator : MonoBehaviour {
             return;
         }
 
+        GeneratePole();
+    }
+
+    private void GeneratePole() {
         var poleHeight = polePrefab.transform.localScale.y;
         var pos = cursorObject.transform.position;
-
-
         Instantiate(
             polePrefab,
             new Vector3(pos.x, pos.y + poleHeight, pos.z),
