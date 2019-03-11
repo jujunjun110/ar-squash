@@ -5,11 +5,11 @@ using UnityEngine;
 public class DebugObjectController : MonoBehaviour {
     [SerializeField] private GameObject arCamera;
 
-    void Start() {
+    private void Start() {
         if (Application.isEditor) {
             ActivateDebugObjects();
         } else {
-            InActivateDebugObjects();
+            InactivateDebugObjects();
         }
     }
 
@@ -20,7 +20,7 @@ public class DebugObjectController : MonoBehaviour {
         }
     }
 
-    private void InActivateDebugObjects() {
+    private void InactivateDebugObjects() {
         arCamera.SetActive(true);
         foreach (Transform child in transform) {
             child.gameObject.SetActive(false);
