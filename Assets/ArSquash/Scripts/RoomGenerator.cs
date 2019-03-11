@@ -7,6 +7,7 @@ public class RoomGenerator : MonoBehaviour {
     [SerializeField] private GameObject cursorObject;
     [SerializeField] private GameObject polePrefab;
     [SerializeField] private GameObject room;
+    [SerializeField] private Material wallMaterial;
 
     private List<Transform> tappedPoints = new List<Transform>();
 
@@ -47,7 +48,6 @@ public class RoomGenerator : MonoBehaviour {
         var p4 = p1 + Vector3.up * 2;
 
         foreach (var pos in new[] {p1, p2, p3, p4}) {
-            Debug.Log(pos);
             GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             cube.transform.position = pos;
         }
@@ -61,5 +61,8 @@ public class RoomGenerator : MonoBehaviour {
         mesh.RecalculateNormals();
         var filter = GetComponent<MeshFilter>();
         filter.sharedMesh = mesh;
+
+        var renderer = GetComponent<MeshRenderer>();
+        renderer.material = wallMaterial;
     }
 }

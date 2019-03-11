@@ -7,9 +7,9 @@ public class DebugCameraController : MonoBehaviour {
 
 
     void Update() {
-//        if (Input.GetAxis("Mouse X") == 0) {
-//            return;
-//        }
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            return;
+        }
 
         if (Input.anyKey) {
             // Move
@@ -21,7 +21,7 @@ public class DebugCameraController : MonoBehaviour {
         } else {
             // Rotate
             transform.Rotate(
-                verticalSpeed * Input.GetAxis("Mouse Y"),
+                -verticalSpeed * Input.GetAxis("Mouse Y"),
                 horizontalSpeed * Input.GetAxis("Mouse X"),
                 0
             );
