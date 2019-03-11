@@ -16,55 +16,46 @@ public class RoomGenerator : MonoBehaviour {
             return;
         }
 
-        Debug.Log("TOUCHED");
+        var copied = new GameObject().transform;
+        copied.position = cursorObject.transform.position;
+        copied.rotation = cursorObject.transform.rotation;
+        tappedPoints.Add(copied);
 
         GeneratePole();
+        var pointNum = tappedPoints.Count;
+        if (pointNum < 2) {
+            return;
+        }
+
+        var point1 = tappedPoints[pointNum - 2].position;
+        var point2 = tappedPoints[pointNum - 1].position;
+        GenerateMesh(point1, point2);
     }
 
     private void GeneratePole() {
         var poleHeight = polePrefab.transform.localScale.y;
-        var pos = cursorObject.transform.position;
         Instantiate(
             polePrefab,
-            new Vector3(pos.x, pos.y + poleHeight, pos.z),
+            cursorObject.transform.position + Vector3.up * poleHeight,
             cursorObject.transform.rotation,
             room.transform
         );
-
-        var copied = new GameObject().transform;
-        copied.position = cursorObject.transform.position;
-        copied.rotation = cursorObject.transform.rotation;
-
-        tappedPoints.Add(copied);
-        Debug.Log(tappedPoints.Count);
-        var pointNum = tappedPoints.Count;
-        if (pointNum >= 2) {
-            foreach (var p in tappedPoints) {
-                Debug.Log(p.position);
-            }
-
-            var point1 = tappedPoints[pointNum - 2].position;
-            var point2 = tappedPoints[pointNum - 1].position;
-            var point3 = new Vector3(point1.x, point1.y + 2, point1.z);
-            GenerateMesh(point1, point2, point3);
-        }
     }
 
-    void GenerateMesh(Vector3 p1, Vector3 p2, Vector3 p3) {
-        foreach (var pos in new[] {p1, p2, p3}) {
+    void GenerateMesh(Vector3 p1, Vector3 p2) {
+        var p3 = p1 + Vector3.up * 2;
+        var p4 = p1 + Vector3.up * 2;
+
+        foreach (var pos in new[] {p1, p2, p3, p4}) {
             Debug.Log(pos);
-            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             cube.transform.position = pos;
         }
 
 
         var mesh = new Mesh {
-            vertices = new Vector3[] {
-                p1,
-                p2,
-                p3,
-            },
-            triangles = new int[] {0, 1, 2}
+            vertices = new[] {p1, p2, p3},
+            triangles = new[] {0, 1, 2}
         };
 
         mesh.RecalculateNormals();
