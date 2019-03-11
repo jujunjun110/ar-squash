@@ -12,7 +12,7 @@ public class Blinker : MonoBehaviour {
             return;
         }
 
-        count += 5;
+        count += 1;
         if (count > 360) {
             count = 0;
         }

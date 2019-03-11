@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using Vuforia;
 
 public class RoomGenerator : MonoBehaviour {
     [SerializeField] private GameObject cursorObject;
@@ -50,8 +48,8 @@ public class RoomGenerator : MonoBehaviour {
         var distance = Vector3.Distance(p1, p2);
 
 
-        var wall = Instantiate(wallPrefab);
-        wall.transform.position = new Vector3(mid.x, mid.y + wallPrefab.transform.localScale.y / 2, mid.z);
+        var wall = Instantiate(wallPrefab, room.transform);
+        wall.transform.position = mid + Vector3.up * wallPrefab.transform.localScale.y / 2;
         wall.transform.localScale += Vector3.right * (distance - 1);
         wall.transform.rotation = Quaternion.Euler(0, -horizontal_rot * 180 / Mathf.PI, 0);
     }

@@ -206,7 +206,7 @@ MonoBehaviour:
   polePrefab: {fileID: 2227679839498844888, guid: d1c33913161fa41bfbb919a50ac191dc,
     type: 3}
   room: {fileID: 265548085}
-  wallPrefab: {fileID: 4818007531335574153, guid: 2fd4387c35b7f408086d629c1aeceab1,
+  wallPrefab: {fileID: 4443577648151270908, guid: ec926588bd5e34eed9b53f2fd4388eb9,
     type: 3}
 --- !u!1 &305337874
 GameObject:
