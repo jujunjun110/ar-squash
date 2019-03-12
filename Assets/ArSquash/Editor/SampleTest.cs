@@ -8,10 +8,14 @@ namespace Tests {
     public class SampleTest {
         [Test]
         public void AnyTest() {
-            int a = 5, b = 4;
-            int ans = a * b;
-            Assert.AreEqual(ans, 20);
-            // Use the Assert class to test conditions
+            var p1 = new Vector3(10, 0, 0);
+            var p2 = new Vector3(0, 0, 10);
+            var actual = new RoomGenerator().GetTransform(p1, p2);
+            Debug.Log(actual.position);
+            Debug.Log(actual.rotation);
+            Debug.Log(actual.localScale);
+
+            Assert.AreEqual(actual.position, new Vector3(5, 0, 5));
         }
     }
 }

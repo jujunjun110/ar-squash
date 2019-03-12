@@ -42,16 +42,10 @@ public class RoomGenerator : MonoBehaviour {
     }
 
     void GenerateMesh(Vector3 p1, Vector3 p2) {
-        var mid = (p1 + p2) / 2;
-        var tan = (p1.z - p2.z) / (p1.x - p2.x);
-        var horizontal_rot = Mathf.Atan(tan);
-        var distance = Vector3.Distance(p1, p2);
-
-
         var wall = Instantiate(wallPrefab, room.transform);
-        var trans = getTransform(p1, p2);
-        wall.transform.position = trans.position;
-        wall.transform.localScale = trans.localScale;
+        var trans = GetTransform(p1, p2);
+        wall.transform.position = trans.position + Vector3.up * wallPrefab.transform.localScale.y / 2;
+        wall.transform.localScale += trans.localScale;
         wall.transform.rotation = trans.rotation;
     }
 
@@ -61,8 +55,8 @@ public class RoomGenerator : MonoBehaviour {
         var horizontal_rot = Mathf.Atan(tan);
         var distance = Vector3.Distance(p1, p2);
         var ret = new GameObject().transform;
-        ret.transform.position = mid + Vector3.up * wallPrefab.transform.localScale.y / 2;
-        ret.transform.localScale += Vector3.right * (distance - 1);
+        ret.transform.position = mid;
+        ret.transform.localScale = Vector3.right * (distance - 1);
         ret.transform.rotation = Quaternion.Euler(0, -horizontal_rot * 180 / Mathf.PI, 0);
 
         return ret;
