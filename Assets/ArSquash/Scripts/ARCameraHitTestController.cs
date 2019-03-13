@@ -15,6 +15,9 @@ public class ARCameraHitTestController : MonoBehaviour {
         }
 
         var hitResult = hitResults.First();
+        if (GameManager.RoomGenerated) {
+            return;
+        }
 
         cursorObject.transform.position = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
         cursorObject.transform.rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);

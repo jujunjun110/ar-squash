@@ -12,6 +12,10 @@ public class RoomGenerator : MonoBehaviour {
 
 
     private void Update() {
+        if (GameManager.RoomGenerated) {
+            return;
+        }
+
         if (!AppUtil.Touched()) {
             return;
         }
@@ -30,6 +34,11 @@ public class RoomGenerator : MonoBehaviour {
         var point1 = tappedPoints[pointNum - 2].position;
         var point2 = tappedPoints[pointNum - 1].position;
         GenerateMesh(point1, point2);
+
+        if (pointNum >= 4) {
+            GameManager.RoomGenerated = true;
+            Debug.Log("Room Generated.");
+        }
     }
 
     private void GeneratePole() {

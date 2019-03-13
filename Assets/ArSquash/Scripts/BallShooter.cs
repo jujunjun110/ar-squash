@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class BallShooter : MonoBehaviour {
     [SerializeField] private GameObject ballPrefab;
+    [SerializeField] private GameObject racketPrefab;
+
     private GameObject ball;
+    private GameObject racket;
 
     private void FixedUpdate() {
-        if (!Input.GetKeyUp(KeyCode.Space)) {
+        if (!GameManager.RoomGenerated) {
             return;
         }
 
-        Debug.Log("Space Pushed");
+        if (!AppUtil.Touched()) {
+            return;
+        }
 
-//        if (ball) {
-//            return;
-//        }
+        if (!racket) {
+            racket = Instantiate(racketPrefab, this.transform);
+            racket.transform.localPosition = new Vector3(0, 0, 0.1f);
+        }
+
 
         ball = Instantiate(ballPrefab);
-        ball.transform.position = transform.position;
-        var speed = 10.0f;
+        ball.transform.position = transform.position + transform.forward * 0.15f;
+        var speed = 5.0f;
         var vec = this.transform.forward * speed;
         ball.GetComponent<Rigidbody>().velocity = vec;
     }

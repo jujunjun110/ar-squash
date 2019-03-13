@@ -14,6 +14,10 @@ public class DebugCameraHitTestController : MonoBehaviour {
             return;
         }
 
+        if (GameManager.RoomGenerated) {
+            return;
+        }
+
         cursorObject.transform.position = hit.point;
         cursorObject.transform.rotation = hit.transform.rotation;
     }
