@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7059464421109672574}
   - component: {fileID: 6302609542605039382}
   m_Layer: 0
-  m_Name: WallPrefab
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +86,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4443577648151270908}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e032c35639b884ca1ad04a13573ca917, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -105,5 +105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doBlink: 1
+  loopDuration: 1000
   max_opacity: 0.8
   min_opacity: 0.4
