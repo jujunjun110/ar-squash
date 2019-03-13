@@ -7,11 +7,11 @@ using UnityEngine.TestTools;
 namespace Tests {
     public class SampleTest {
         [Test]
-        public void AnyTest() {
+        public void TestGetTransform() {
             var p1 = new Vector3(10, 0, 0);
             var p2 = new Vector3(0, 0, 10);
             var testObject = new GameObject();
-            var actual = new RoomGenerator().GetTransform(p1, p2, testObject);
+            var actual = RoomGenerator.GetWallTransform(p1, p2, testObject);
 
             Assert.AreEqual(new Vector3(5, 0.5f, 5), actual.position);
             Assert.LessOrEqual(actual.rotation.x - 0, 0.01);

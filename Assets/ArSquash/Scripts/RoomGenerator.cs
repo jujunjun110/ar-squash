@@ -44,13 +44,13 @@ public class RoomGenerator : MonoBehaviour {
 
     void GenerateMesh(Vector3 p1, Vector3 p2) {
         var wall = Instantiate(wallPrefab, room.transform);
-        var trans = GetTransform(p1, p2, wallPrefab);
+        var trans = GetWallTransform(p1, p2, wallPrefab);
         wall.transform.position = trans.position;
         wall.transform.localScale = trans.localScale;
         wall.transform.rotation = trans.rotation;
     }
 
-    public Transform GetTransform(Vector3 p1, Vector3 p2, GameObject targetObject) {
+    public static Transform GetWallTransform(Vector3 p1, Vector3 p2, GameObject targetObject) {
         var mid = (p1 + p2) / 2;
         var tan = (p1.z - p2.z) / (p1.x - p2.x);
         var horizontal_rot = -Mathf.Rad2Deg * Mathf.Atan(tan);
