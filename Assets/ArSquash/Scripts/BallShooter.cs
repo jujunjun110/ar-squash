@@ -19,7 +19,7 @@ public class BallShooter : MonoBehaviour {
         }
 
         if (!racket) {
-            racket = Instantiate(racketPrefab, this.transform);
+            racket = Instantiate(racketPrefab, transform);
             racket.transform.localPosition = new Vector3(0, 0, 0.1f);
         }
 

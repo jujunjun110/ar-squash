@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RoomGenerator : MonoBehaviour {
@@ -7,6 +8,8 @@ public class RoomGenerator : MonoBehaviour {
     [SerializeField] private GameObject polePrefab;
     [SerializeField] private GameObject room;
     [SerializeField] private GameObject wallPrefab;
+    [SerializeField] private GameObject floorPrefab;
+
 
     private List<Transform> tappedPoints = new List<Transform>();
 
@@ -35,11 +38,20 @@ public class RoomGenerator : MonoBehaviour {
         var point2 = tappedPoints[pointNum - 1].position;
         GenerateMesh(point1, point2);
 
-        if (pointNum >= 4) {
+        if (pointNum >= 5) {
             GameManager.RoomGenerated = true;
             Debug.Log("Room Generated.");
+            var avgPointHeight = tappedPoints.Select(p => p.transform.position.y).Average();
+            GenerateFloor(avgPointHeight);
+            GenerateFloor(avgPointHeight + polePrefab.transform.localScale.y * 2);
         }
     }
+
+    private void GenerateFloor(float height) {
+        var floor = Instantiate(floorPrefab);
+        floor.transform.position = new Vector3(0, height, 0);
+    }
+
 
     private void GeneratePole() {
         var poleHeight = polePrefab.transform.localScale.y;

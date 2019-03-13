@@ -208,6 +208,8 @@ MonoBehaviour:
   room: {fileID: 265548085}
   wallPrefab: {fileID: 4443577648151270908, guid: ec926588bd5e34eed9b53f2fd4388eb9,
     type: 3}
+  floorPrefab: {fileID: 6943531763454315523, guid: e93f6f35e5bdd4dc485da15cfa723749,
+    type: 3}
 --- !u!1 &305337874
 GameObject:
   m_ObjectHideFlags: 0
