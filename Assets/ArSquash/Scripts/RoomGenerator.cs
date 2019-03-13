@@ -11,7 +11,7 @@ public class RoomGenerator : MonoBehaviour {
     private List<Transform> tappedPoints = new List<Transform>();
 
 
-    void Update() {
+    private void Update() {
         if (!AppUtil.Touched()) {
             return;
         }
@@ -42,7 +42,7 @@ public class RoomGenerator : MonoBehaviour {
         );
     }
 
-    void GenerateMesh(Vector3 p1, Vector3 p2) {
+    private void GenerateMesh(Vector3 p1, Vector3 p2) {
         var wall = Instantiate(wallPrefab, room.transform);
         var trans = GetWallTransform(p1, p2, wallPrefab);
         wall.transform.position = trans.position;
