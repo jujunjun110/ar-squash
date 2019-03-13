@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomGenerator : MonoBehaviour {
@@ -52,14 +53,13 @@ public class RoomGenerator : MonoBehaviour {
     public Transform GetTransform(Vector3 p1, Vector3 p2, GameObject targetObject) {
         var mid = (p1 + p2) / 2;
         var tan = (p1.z - p2.z) / (p1.x - p2.x);
-        var horizontal_rot = Mathf.Atan(tan);
+        var horizontal_rot = -Mathf.Rad2Deg * Mathf.Atan(tan);
         var distance = Vector3.Distance(p1, p2);
 
         var ret = new GameObject().transform;
         ret.transform.position = mid + Vector3.up * targetObject.transform.localScale.y / 2;
         ret.transform.localScale = targetObject.transform.localScale + Vector3.right * (distance - 1);
-        ret.transform.rotation = Quaternion.Euler(0, -horizontal_rot * 180 / Mathf.PI, 0);
-
+        ret.transform.rotation = Quaternion.Euler(0, horizontal_rot, 0);
         return ret;
     }
 }
