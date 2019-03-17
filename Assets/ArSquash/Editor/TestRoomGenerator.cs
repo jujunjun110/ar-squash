@@ -11,7 +11,7 @@ namespace Tests {
             var p1 = new Vector3(10, 0, 0);
             var p2 = new Vector3(0, 0, 10);
             var testObject = new GameObject();
-            var actual = RoomGenerator.GetWallTransform(p1, p2, 1.8f);
+            var actual = new RoomGenerator().GetWallTransform(p1, p2);
 
             Assert.AreEqual(new Vector3(5, 0.5f, 5), actual.position);
             Assert.LessOrEqual(actual.rotation.x - 0, 0.01);

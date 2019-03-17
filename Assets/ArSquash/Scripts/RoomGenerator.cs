@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class RoomGenerator : MonoBehaviour {
     [SerializeField] private GameObject room;
+    [SerializeField] private float roomHeight = 2.0f;
     [SerializeField] private GameObject cursorObject;
     [SerializeField] private GameObject polePrefab;
     [SerializeField] private GameObject wallPrefab;
@@ -46,7 +47,7 @@ public class RoomGenerator : MonoBehaviour {
         Debug.Log("Room Generated.");
         var avgPointHeight = tappedPoints.Select(p => p.transform.position.y).Average();
         GenerateFloor(avgPointHeight);
-        GenerateFloor(avgPointHeight + polePrefab.transform.localScale.y * 2);
+        GenerateFloor(avgPointHeight + roomHeight * 2);
     }
 
     private void GenerateFloor(float height) {
@@ -56,24 +57,28 @@ public class RoomGenerator : MonoBehaviour {
 
 
     private void GeneratePole() {
-        var poleHeight = polePrefab.transform.localScale.y;
-        Instantiate(
+        var pole = Instantiate(
             polePrefab,
-            cursorObject.transform.position + Vector3.up * poleHeight,
+            cursorObject.transform.position + Vector3.up * roomHeight,
             cursorObject.transform.rotation,
             room.transform
+        );
+        pole.transform.localScale = new Vector3(
+            pole.transform.localScale.x,
+            roomHeight,
+            pole.transform.localScale.z
         );
     }
 
     private void GenerateMesh(Vector3 p1, Vector3 p2) {
         var wall = Instantiate(wallPrefab, room.transform);
-        var trans = GetWallTransform(p1, p2, polePrefab.transform.localScale.y);
+        var trans = GetWallTransform(p1, p2);
         wall.transform.position = trans.position;
         wall.transform.localScale = trans.localScale;
         wall.transform.rotation = trans.rotation;
     }
 
-    public static Transform GetWallTransform(Vector3 p1, Vector3 p2, float roomHeight) {
+    public Transform GetWallTransform(Vector3 p1, Vector3 p2) {
         var mid = (p1 + p2) / 2;
         var tan = (p1.z - p2.z) / (p1.x - p2.x);
         var horizontal_rot = -Mathf.Rad2Deg * Mathf.Atan(tan);
