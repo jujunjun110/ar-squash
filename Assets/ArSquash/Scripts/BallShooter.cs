@@ -27,7 +27,7 @@ public class BallShooter : MonoBehaviour {
         ball = Instantiate(ballPrefab);
         ball.transform.position = transform.position + transform.forward * 0.15f;
         var speed = 3.0f;
-        var vec = this.transform.forward * speed;
+        var vec = transform.forward * speed;
         ball.GetComponent<Rigidbody>().velocity = vec;
     }
 }
