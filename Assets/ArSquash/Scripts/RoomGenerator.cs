@@ -23,8 +23,6 @@ public class RoomGenerator : MonoBehaviour {
             return;
         }
 
-        Debug.Log(polePrefab.transform.localScale.y);
-
         var copied = new GameObject().transform;
         copied.position = cursorObject.transform.position;
         copied.rotation = cursorObject.transform.rotation;
